@@ -2,7 +2,7 @@ const { Router } = require('express')
 const route = Router()
 const { body } = require('express-validator')
 const { createUser } = require('../controllers/users')
-const { validateDni } = require('../helpers/validation')
+const { validateDni, validateEmail } = require('../helpers/validation')
 
 route.post('/create-users', 
 body('name').trim().escape().not().isEmpty().isLength({min: 3, max: 12}).withMessage('Nombre inválido'),
@@ -13,6 +13,7 @@ body('direction').trim().escape().not().isEmpty().isLength({min: 4}).withMessage
 body('number').trim().escape().isNumeric().not().isEmpty().isLength({max: 5}).withMessage('Numero invalido'),
 body('location').trim().escape().not().isEmpty().withMessage('Localidad invalida'),
 body('email').trim().escape().isEmail().not().isEmpty().withMessage('Email invalido'),
+body('email').custom(validateEmail),
 body('password').not().isEmpty().isLength({min: 5}).withMessage('Contraseña invalida'),
 createUser
 )
