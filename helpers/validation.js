@@ -1,21 +1,19 @@
 const User = require('../models/users')
 
 const validateDni = async(dni) =>{
-  const isDni = await User.find({dni})
+  const isDni = await User.findOne({dni})
 
-  if (isDni.length !== 0) {
+  if (isDni) {
     throw new Error(`El DNI ${dni} ya existe`)
   }
-  return true
 }
 
 const validateEmail = async(email) =>{
-  const isEmail = await User.find({email})
+  const isEmail = await User.findOne({email})
 
-  if (isEmail.length !== email) {
+  if (isEmail) {
     throw new Error(`El email ${email} ya existe`)
   }
-  return true
 }
 
-module.exports = { validateDni , validateEmail}
+module.exports = { validateDni, validateEmail }
