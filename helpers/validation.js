@@ -9,4 +9,13 @@ const validateDni = async(dni) =>{
   return true
 }
 
-module.exports = { validateDni }
+const validateEmail = async(email) =>{
+  const isEmail = await User.find({email})
+
+  if (isEmail.length !== email) {
+    throw new Error(`El email ${email} ya existe`)
+  }
+  return true
+}
+
+module.exports = { validateDni , validateEmail}
