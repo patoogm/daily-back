@@ -1,8 +1,10 @@
 const { Router } = require('express')
 const route = Router()
 const { body } = require('express-validator')
-const { createUser } = require('../controllers/users')
+const { createUser, getUsers } = require('../controllers/users')
 const { validateDni, validateEmail } = require('../helpers/validation')
+
+route.get('/get-users', getUsers)
 
 route.post('/create-users', 
 body('name').trim().escape().not().isEmpty().isLength({min: 3, max: 12}).withMessage('Nombre inválido'),

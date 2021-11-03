@@ -29,4 +29,8 @@ const createUser = async(req, res) =>{
   res.json(`User created successfully`)
 }
 
-module.exports = { createUser }
+const getUsers = async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+}
+module.exports = { createUser, getUsers }
