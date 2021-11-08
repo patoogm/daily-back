@@ -19,7 +19,6 @@ const createNews = async(req, res) => {
   }
 }
 
-
 const getNews = async(req, res) =>{
   try {
     const news = await News.find({})
