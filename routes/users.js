@@ -11,7 +11,6 @@ body('name').trim().escape().not().isEmpty().isLength({min: 3, max: 12}).withMes
 body('lastName').trim().escape().not().isEmpty().withMessage('Apellido invalido'),
 body('dni').trim().escape().isNumeric().isLength({min: 7, max: 8}).withMessage('Dni Invalido'),
 body('dni').custom(validateDni),
-body('province').trim().escape().not().isEmpty().withMessage('Provincia invalida'),
 body('email').trim().escape().isEmail().not().isEmpty().withMessage('Email invalido'),
 body('email').custom(validateEmail),
 body('password').not().isEmpty().isLength({min: 5}).withMessage('Contraseña invalida'),
