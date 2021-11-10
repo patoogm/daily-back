@@ -5,7 +5,7 @@ const news = new Schema({
   image: String,
   newsBody: String,
   date: String,
-  autor_id: {type: Schema.ObjectId, ref: 'Users'}
+  autor_id: {type: Schema.Types.ObjectId, ref: 'Users'}
 })
 
 module.exports = model('News', news)
