@@ -1,5 +1,5 @@
 const News = require('../models/news')
-const users = require('../models/users')
+const Users = require('../models/users')
 
 const createNews = async(req, res) => {
   const {title,image,newsBody,date,autor_id} = req.body
@@ -51,10 +51,14 @@ const editNews = async(req, res) => {
 
 const getNews = async(req, res) =>{
   try {
-    const news = await News.find({})  
-    res.json(news)
+    const news = await News.find({}) || []
+    const query = await Promise.all(news.map(async article => {
+      const autor = await Users.findById(article.autor_id)
+      return {article,autor}
+    }))
+    res.json(query)
   } catch (error) {
-    return resstatus(404).json({
+    return res.status(404).json({
       message: "Cannot found any news"
     })
   }
@@ -65,7 +69,7 @@ const getNewsById = async(req, res) =>{
     const news = await News.findById(req.params.newsId)
     res.json(news)
   } catch (error) {
-    return resstatus(404).json({
+    return res.status(404).json({
       message: "Cannot found the news"
     })
   }
