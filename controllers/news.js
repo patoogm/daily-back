@@ -1,4 +1,5 @@
 const News = require('../models/news')
+const users = require('../models/users')
 
 const createNews = async(req, res) => {
   const {title,image,newsBody,date,autor_id} = req.body
@@ -19,9 +20,38 @@ const createNews = async(req, res) => {
   }
 }
 
+const editNews = async(req, res) => {
+  console.log(req.params.newsId)
+  console.log(req.body.newsBody)
+  const {title,image,newsBody,date,autor_id} = req.body
+  try {
+    News.findByIdAndUpdate(req.params.newsId, {
+      title,
+      image,
+      newsBody,
+      date,
+      autor_id
+    },
+      {},
+      (err,doc,res)=>{
+        if(err){
+          console.log("Error: " + err )
+        } 
+        console.log("Doc: "+ doc)
+        console.log("Res:" + res)
+      }
+    )
+    res.json(`News edited succesfully`)
+  } catch (error) {
+    return res.json({
+      message: error
+    })
+  }
+}
+
 const getNews = async(req, res) =>{
   try {
-    const news = await News.find({})
+    const news = await News.find({})  
     res.json(news)
   } catch (error) {
     return resstatus(404).json({
@@ -51,4 +81,4 @@ const deleteNews = async(req, res) =>{
     })
   }
 }
-module.exports = { createNews ,getNews, getNewsById, deleteNews}
+module.exports = { createNews ,getNews, getNewsById, deleteNews, editNews}
