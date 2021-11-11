@@ -3,6 +3,7 @@ const Users = require('../models/users')
 
 const createNews = async(req, res) => {
   const {title,image,newsBody,date,autor_id} = req.body
+  console.log(autor_id)
   try{
     const newNews = new News({
       title,
@@ -11,6 +12,7 @@ const createNews = async(req, res) => {
       date,
       autor_id
     }) 
+    console.log(newNews)
     await newNews.save()
     res.json(`News created successfully`)
   }catch(error){
