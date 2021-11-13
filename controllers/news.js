@@ -1,6 +1,5 @@
 const News = require('../models/news')
 const Users = require('../models/users')
-const mongoose = require('mongoose')
 
 const createNews = async(req, res) => {
   const {title,image,newsBody,date,autor_id} = req.body
