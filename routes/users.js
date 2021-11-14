@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const route = Router()
 const { body } = require('express-validator')
-const { createUser, getUsers } = require('../controllers/users')
+const { createUser, getUsers, editUser, deleteUser } = require('../controllers/users')
 const { validateDni, validateEmail } = require('../helpers/validation')
 
 route.get('/get-users', getUsers)
@@ -14,7 +14,9 @@ body('dni').custom(validateDni),
 body('email').trim().escape().isEmail().not().isEmpty().withMessage('Email invalido'),
 body('email').custom(validateEmail),
 body('password').not().isEmpty().isLength({min: 5}).withMessage('Contraseña invalida'),
-createUser
-)
+createUser)
+
+route.put('/:userId', editUser)
+route.delete('/:userId', deleteUser)
 
 module.exports = route

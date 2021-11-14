@@ -13,6 +13,7 @@ const getNews = require('../routes/news')
 const getNewsById = require('../routes/news')
 const deleteNews = require('../routes/news')
 const editNews = require('../routes/news')
+const { editUser, deleteUser } = require('../controllers/users')
 
 app.use(express.json())
 app.use((req, res, next) => {
@@ -25,10 +26,12 @@ app.use((req, res, next) => {
 
 //Ruta
 app.use('/', getUsers)
-app.use('/', getNews)
-app.use('/', getNewsById)
 app.use('/', createUser)
 app.use('/', loginUser)
+app.use('/', deleteUser)
+app.use('/', editUser)
+app.use('/', getNews)
+app.use('/', getNewsById)
 app.use('/', createNews)
 app.use('/', deleteNews)
 app.use('/', editNews)
