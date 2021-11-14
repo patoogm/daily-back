@@ -16,8 +16,8 @@ const createNews = async(req, res) => {
     await newNews.save()
     res.json(`News created successfully`)
   }catch(error){
-    return res.json({
-      message: error
+    return res.status(404).json({
+      message: "Cannot create news"
     })
   }
 }
