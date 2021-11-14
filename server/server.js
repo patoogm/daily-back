@@ -13,7 +13,8 @@ const getNews = require('../routes/news')
 const getNewsById = require('../routes/news')
 const deleteNews = require('../routes/news')
 const editNews = require('../routes/news')
-const { editUser, deleteUser } = require('../controllers/users')
+const editUser = require('../routes/users')
+const deleteUser = require('../routes/users')
 
 app.use(express.json())
 app.use((req, res, next) => {
