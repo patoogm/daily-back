@@ -7,6 +7,7 @@ const loginUser = async(req, res) =>{
   const{ email, password } = req.body
 
   const searchEmail = await User.findOne({ email });
+  const { _id } = searchEmail;
 
   if (searchEmail) {
     const match = bcrypt.compareSync(password, searchEmail.password)
@@ -17,7 +18,7 @@ const loginUser = async(req, res) =>{
       const token = jwt.sign(payload, process.env.SECRETKEY, {
         expiresIn: 900
       });
-      res.status(200).json({ msg:'Usuario logueado exitosamente', token })
+      res.status(200).json({ msg:'Usuario logueado exitosamente', token, _id })
     } else {
       res.status(401).json({ msg: 'Usuario o contraseña incorrecto' })
     }
