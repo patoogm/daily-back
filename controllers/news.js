@@ -87,4 +87,5 @@ const deleteNews = async(req, res) =>{
     })
   }
 }
+
 module.exports = { createNews ,getNews, getNewsById, deleteNews, editNews}
