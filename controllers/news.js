@@ -2,17 +2,17 @@ const News = require('../models/news')
 const Users = require('../models/users')
 
 const createNews = async(req, res) => {
-  const {title,image,newsBody,date,autor_id} = req.body
-  console.log(autor_id)
+  const {category, description, title, image, newsBody, date, autor_id} = req.body
   try{
     const newNews = new News({
+      category,
       title,
+      description,
       image,
       newsBody,
       date,
       autor_id
     }) 
-    console.log(newNews)
     await newNews.save()
     res.json(`News created successfully`)
   }catch(error){
@@ -28,7 +28,9 @@ const editNews = async(req, res) => {
   const {title,image,newsBody,date,autor_id} = req.body
   try {
     News.findByIdAndUpdate(req.params.newsId, {
+      category,
       title,
+      description,
       image,
       newsBody,
       date,

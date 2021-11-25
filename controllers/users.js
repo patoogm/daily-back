@@ -10,14 +10,15 @@ const createUser = async(req, res) =>{
   }
   
   try{
-    const { name, lastName, dni, email, password } = req.body
+    const { name, lastName, dni, email, password, role } = req.body
 
     const newUser = new User({
       name,
       lastName,
       dni,
       email,
-      password
+      password,
+      role
     })
 
     const salt = bcrypt.genSaltSync()
@@ -35,14 +36,15 @@ const createUser = async(req, res) =>{
 const editUser = async(req, res) => {
   console.log(req.params.newsId)
   console.log(req.body.newsBody)
-  const { name, lastName, dni, email, password } = req.body
+  const { name, lastName, dni, email, password, role } = req.body
   try {
     User.findByIdAndUpdate(req.params.userId, {
       name,
       lastName,
       dni,
       email,
-      password
+      password,
+      role
     },
       {},
       (err,doc,res)=>{
