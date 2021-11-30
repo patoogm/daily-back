@@ -10,7 +10,7 @@ route.post('/create-news',
 body('category').trim().escape().not().isEmpty().withMessage('Invalid category'),
 body('description').trim().escape().not().isEmpty().isLength({min:10,max:70}).withMessage('Invalid description'),
 body('title').trim().escape().not().isEmpty().isLength({min:3,max:40}).withMessage('Invalid title'),
-body('bodyNews').trim().escape().not().isEmpty().isLength({min:10,max:400}).withMessage('Invalid article'),
+body('newsBody').trim().escape().not().isEmpty().isLength({min:10,max:400}).withMessage('Invalid article'),
 body('image').trim().escape().not().isEmpty().withMessage('Invalid image'),
 createNews)
 route.delete('/news/:newsId', deleteNews)
