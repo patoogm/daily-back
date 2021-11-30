@@ -7,7 +7,7 @@ const protectionRoutes = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.SECRETKEY, (err, decoded) => {
       if (err) {
-        return res.json({ mensaje: 'Token inválido' });
+        return res.status(401).json({ mensaje: 'Token inválido' });
       } else {
         console.log(decoded)
         req.decoded = decoded;
@@ -15,9 +15,7 @@ const protectionRoutes = (req, res, next) => {
       }
     });
   } else {
-    res.send({
-      mensaje: 'Token no proveído'
-    });
+    res.status(401).send({ mensaje: 'Token no proveído' });
   }
 }
 
