@@ -1,7 +1,14 @@
+const { validationResult } = require('express-validator')
 const News = require('../models/news')
 const Users = require('../models/users')
 
 const createNews = async(req, res) => {
+  
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({errors: errors.array()})
+  }
+
   const {category, description, title, image, newsBody, date, autor_id} = req.body
   try{
     const newNews = new News({
