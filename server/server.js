@@ -10,11 +10,12 @@ const loginUser = require('../routes/login')
 const createNews = require('../routes/news')
 const getUsers = require('../routes/users')
 const getNews = require('../routes/news')
-const getNewsById = require('../routes/news')
+const getNewsByName = require('../routes/news')
 const deleteNews = require('../routes/news')
 const editNews = require('../routes/news')
 const editUser = require('../routes/users')
 const deleteUser = require('../routes/users')
+const getUsersByName = require('../routes/users')
 
 app.use(express.json())
 app.use((req, res, next) => {
@@ -27,12 +28,13 @@ app.use((req, res, next) => {
 
 //Ruta
 app.use('/', getUsers)
+app.use('/', getUsersByName)
 app.use('/', createUser)
 app.use('/', loginUser)
 app.use('/', deleteUser)
 app.use('/', editUser)
 app.use('/', getNews)
-app.use('/', getNewsById)
+app.use('/', getNewsByName)
 app.use('/', createNews)
 app.use('/', deleteNews)
 app.use('/', editNews)

@@ -1,10 +1,10 @@
 const { Router } = require('express')
 const route = Router()
-const { createNews, getNews, getNewsById, deleteNews, editNews} = require('../controllers/news')
+const { createNews, getNews, getNewsByName, deleteNews, editNews} = require('../controllers/news')
 const { body } = require('express-validator')
 
 route.get('/get-news', getNews)
-route.get('/:newsId', getNewsById)
+route.get('/:txtSearch', getNewsByName)
 
 route.post('/create-news',
 body('category').trim().escape().not().isEmpty().withMessage('Invalid category'),

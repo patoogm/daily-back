@@ -75,11 +75,15 @@ const getNews = async(req, res) =>{
   }
 }
 
-const getNewsById = async(req, res) =>{
-  try {
-    const news = await News.findById(req.params.newsId)
-    res.json(news)
-  } catch (error) {
+const getNewsByName = async(req, res) =>{
+  try{
+    const news = await News.find({title : { $regex: '.*' + req.params.txtSearch + '.*', $options: "$i"} })
+    const query = await Promise.all(news.map(async article => {
+      const autor = await Users.findById(article.autor_id)
+      return {article,autor}
+    }))
+    res.json(query)
+  } catch(error){
     return res.status(404).json({
       message: "Cannot found the news"
     })
@@ -97,4 +101,4 @@ const deleteNews = async(req, res) =>{
   }
 }
 
-module.exports = { createNews ,getNews, getNewsById, deleteNews, editNews}
+module.exports = { createNews ,getNews, getNewsByName, deleteNews, editNews}
