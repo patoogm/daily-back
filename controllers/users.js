@@ -74,6 +74,19 @@ const getUsers = async (req, res) => {
   }
 }
 
+const getUsersByName = async(req,res) =>{
+  try {
+    const users = await User.find(
+      {lastName : {$regex : '.*' + req.params.txtSearch + '.*',$options: "$i"}
+    })
+    res.json(users)
+  } catch (error) {
+    return res.status(404).json({
+      message: "Cannot found any user realated to the parameter"
+    })
+  }
+}
+
 const deleteUser = async(req, res) =>{
   try {
     const news = await User.findByIdAndDelete(req.params.userId)
@@ -84,4 +97,4 @@ const deleteUser = async(req, res) =>{
     })
   }
 }
-module.exports = { createUser, getUsers, editUser, deleteUser }
+module.exports = { createUser, getUsers, editUser, deleteUser, getUsersByName }
