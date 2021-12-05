@@ -5,7 +5,7 @@ const { createUser, getUsers, editUser, deleteUser, getUsersByName } = require('
 const { validateDni, validateEmail } = require('../helpers/validation')
 
 route.get('/get-users', getUsers)
-route.get('/:txtSearch', getUsersByName)
+route.get('/users/:txtSearch', getUsersByName)
 
 route.post('/create-users', 
 body('name').trim().escape().isAlpha('es-ES', {ignore: ' '}).not().isEmpty().isLength({min: 3, max: 20}).withMessage('Nombre inválido'),
