@@ -74,11 +74,18 @@ const getUsers = async (req, res) => {
   }
 }
 
+function normalizeQuery(string = '') {
+  return string.replace(/a/g, '[a,á,à,ä]')
+     .replace(/e/g, '[e,é,ë]')
+     .replace(/i/g, '[i,í,ï]')
+     .replace(/o/g, '[o,ó,ö,ò]')
+     .replace(/u/g, '[u,ü,ú,ù]');
+}
+
 const getUsersByName = async(req,res) =>{
   try {
     const users = await User.find(
-      {lastName : {$regex : '.*' + req.params.txtSearch + '.*',$options: "$i"}
-    })
+      {lastName : {$regex : '.*' + normalizeQuery(req.params.txtSearch) + '.*',$options: "$i"}})
     res.json(users)
   } catch (error) {
     return res.status(404).json({

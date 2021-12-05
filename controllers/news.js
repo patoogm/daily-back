@@ -75,9 +75,18 @@ const getNews = async(req, res) =>{
   }
 }
 
+function normalizeQuery(string = '') {
+  return string.replace(/a/g, '[a,á,à,ä]')
+     .replace(/e/g, '[e,é,ë]')
+     .replace(/i/g, '[i,í,ï]')
+     .replace(/o/g, '[o,ó,ö,ò]')
+     .replace(/u/g, '[u,ü,ú,ù]');
+}
+
 const getNewsByName = async(req, res) =>{
   try{
-    const news = await News.find({title : { $regex: '.*' + req.params.txtSearch + '.*', $options: "$i"} })
+    const news = await News.find(
+      {title : { $regex: '.*' + normalizeQuery(req.params.txtSearch) + '.*', $options: "$i"}})
     const query = await Promise.all(news.map(async article => {
       const autor = await Users.findById(article.autor_id)
       return {article,autor}
