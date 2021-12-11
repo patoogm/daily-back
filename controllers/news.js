@@ -32,7 +32,7 @@ const createNews = async(req, res) => {
 const editNews = async(req, res) => {
   console.log(req.params.newsId)
   console.log(req.body.newsBody)
-  const {title,image,newsBody,date,autor_id} = req.body
+  const {title, image, newsBody, date, autor_id, category, description} = req.body
   try {
     News.findByIdAndUpdate(req.params.newsId, {
       category,
