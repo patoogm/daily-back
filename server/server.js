@@ -26,7 +26,6 @@ app.use((req, res, next) => {
   next();
 });
 
-//Ruta
 app.use('/', getUsers)
 app.use('/', getUsersByName)
 app.use('/', createUser)

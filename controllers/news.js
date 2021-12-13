@@ -19,7 +19,7 @@ const createNews = async(req, res) => {
       newsBody,
       date,
       autor_id
-    }) 
+    })
     await newNews.save()
     res.json(`News created successfully`)
   }catch(error){
@@ -30,8 +30,7 @@ const createNews = async(req, res) => {
 }
 
 const editNews = async(req, res) => {
-  console.log(req.params.newsId)
-  console.log(req.body.newsBody)
+
   const {title, image, newsBody, date, autor_id, category, description} = req.body
   try {
     News.findByIdAndUpdate(req.params.newsId, {

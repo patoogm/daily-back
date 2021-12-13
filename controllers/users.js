@@ -34,8 +34,7 @@ const createUser = async(req, res) =>{
 }
 
 const editUser = async(req, res) => {
-  console.log(req.params.newsId)
-  console.log(req.body.newsBody)
+
   const { name, lastName, dni, email, password, role } = req.body
   try {
     User.findByIdAndUpdate(req.params.userId, {
